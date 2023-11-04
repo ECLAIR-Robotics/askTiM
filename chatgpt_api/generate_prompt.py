@@ -1,9 +1,9 @@
 import openai
-import config
+import config1
 
-openai.api_key = config.open_ai_key
+openai.api_key = config1.open_ai_key
 
-def generate_prompt(text_sample):
+def generate_prompt(text_sample): 
   completion = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo",
     temperature = 0.8,
@@ -11,18 +11,18 @@ def generate_prompt(text_sample):
     messages = [
       {"role": "system", "content": "You are an expert prompt generator for music generation machine learning models."},
 
-      {"role": "user", "content": "Generate a prompt using the template: 'a [mood] + [genre] song with [musical element]' given the following sample of text: \
-      Ah, distinctly I remember it was in the bleak December; \
-      And each separate dying ember wrought its ghost upon the floor. \
-      Eagerly I wished the morrow;—vainly I had sought to borrow \
-      From my books surcease of sorrow—sorrow for the lost Lenore— \
-      For the rare and radiant maiden whom the angels name Lenore— \
-      Nameless here for evermore."},
+      {"role": "user", "content": """Generate a prompt using the template: 'a [mood] + [genre] song with [musical element]' given the following sample of text: 
+      Ah, distinctly I remember it was in the bleak December; 
+      And each separate dying ember wrought its ghost upon the floor. 
+      Eagerly I wished the morrow;—vainly I had sought to borrow 
+      From my books surcease of sorrow—sorrow for the lost Lenore— 
+      For the rare and radiant maiden whom the angels name Lenore— 
+      Nameless here for evermore."""},
       
       {"role": "assistant", "content": "a depressing and spooky classical song with a cello melody"}, 
       
       {"role": "user", "content": f"Generate one based on this text sample: \
-      {text_sample}"}
+       {text_sample}"}
     ]
   )
-  return completion.choices[0].message
+  return completion.choices[0].message.content
