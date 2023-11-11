@@ -1,10 +1,15 @@
-import openai
+from openai import OpenAI
 import config1
+import os
 
-openai.api_key = config1.open_ai_key
+os.environ['open_ai_key'] = config1.open_ai_key
+
+client = OpenAI(
+  api_key=os.environ['open_ai_key'],
+)
 
 def generate_prompt(text_sample): 
-  completion = openai.ChatCompletion.create(
+  completion = client.chat.completions.create(
     model = "gpt-3.5-turbo",
     temperature = 0.8,
     max_tokens = 2000,
